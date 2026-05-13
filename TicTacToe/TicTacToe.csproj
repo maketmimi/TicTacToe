@@ -52,6 +52,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\FrmAboutScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FrmAboutScreen.Designer.cs">
+      <DependentUpon>FrmAboutScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FrmGamePlay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FrmGamePlay.Designer.cs">
+      <DependentUpon>FrmGamePlay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FrmGameSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FrmGameSetup.Designer.cs">
+      <DependentUpon>FrmGameSetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\FrmWelcome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +78,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\FrmAboutScreen.resx">
+      <DependentUpon>FrmAboutScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FrmGamePlay.resx">
+      <DependentUpon>FrmGamePlay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FrmGameSetup.resx">
+      <DependentUpon>FrmGameSetup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\FrmWelcome.resx">
       <DependentUpon>FrmWelcome.cs</DependentUpon>
     </EmbeddedResource>
@@ -71,6 +98,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -88,6 +116,7 @@
   <ItemGroup>
     <Content Include="Assets\GameIcon.ico" />
     <Content Include="Assets\Game.png" />
+    <Content Include="Assets\WelcomeScreenBackground.png" />
     <Content Include="GameIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
