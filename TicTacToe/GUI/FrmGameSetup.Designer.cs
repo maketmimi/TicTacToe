@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGameSetup));
             this.label1 = new System.Windows.Forms.Label();
             this.TxtPlayer1Name = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TxtPlayer2Name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.BtnPlay = new System.Windows.Forms.Button();
             this.BtnClose = new System.Windows.Forms.Button();
@@ -56,20 +56,22 @@
             this.TxtPlayer1Name.Location = new System.Drawing.Point(217, 129);
             this.TxtPlayer1Name.MaxLength = 8;
             this.TxtPlayer1Name.Name = "TxtPlayer1Name";
+            this.TxtPlayer1Name.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TxtPlayer1Name.Size = new System.Drawing.Size(262, 50);
             this.TxtPlayer1Name.TabIndex = 1;
             this.TxtPlayer1Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox1
+            // TxtPlayer2Name
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.Font = new System.Drawing.Font("Tahoma", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(217, 322);
-            this.textBox1.MaxLength = 8;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(262, 50);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtPlayer2Name.BackColor = System.Drawing.Color.White;
+            this.TxtPlayer2Name.Font = new System.Drawing.Font("Tahoma", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtPlayer2Name.Location = new System.Drawing.Point(217, 322);
+            this.TxtPlayer2Name.MaxLength = 8;
+            this.TxtPlayer2Name.Name = "TxtPlayer2Name";
+            this.TxtPlayer2Name.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TxtPlayer2Name.Size = new System.Drawing.Size(262, 50);
+            this.TxtPlayer2Name.TabIndex = 3;
+            this.TxtPlayer2Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
@@ -127,7 +129,7 @@
             this.ClientSize = new System.Drawing.Size(696, 486);
             this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.BtnPlay);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TxtPlayer2Name);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TxtPlayer1Name);
             this.Controls.Add(this.label1);
@@ -135,8 +137,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmGameSetup";
-            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.RightToLeftLayout = true;
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "إعداد اللعبة";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -147,7 +148,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TxtPlayer1Name;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TxtPlayer2Name;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BtnPlay;
         private System.Windows.Forms.Button BtnClose;

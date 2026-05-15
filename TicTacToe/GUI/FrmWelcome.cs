@@ -35,7 +35,11 @@ namespace TicTacToe
         {
             FrmGameSetup fSetup = new FrmGameSetup();
 
+            this.Hide();
+
             fSetup.ShowDialog();
+
+            this.Show();
         }
     }
 }

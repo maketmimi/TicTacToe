@@ -116,6 +116,7 @@
   <ItemGroup>
     <Content Include="Assets\GameIcon.ico" />
     <Content Include="Assets\Game.png" />
+    <None Include="Assets\QuestionMark.png" />
     <Content Include="Assets\WelcomeScreenBackground.png" />
     <Content Include="GameIcon.ico" />
   </ItemGroup>
