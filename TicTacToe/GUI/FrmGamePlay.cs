@@ -14,28 +14,30 @@ namespace TicTacToe.GUI
             QuestionMark
         }
 
-        private enum EnGameState
+        private enum EnWinner
         {
-            InProgress,
-            GameOver
+            XPlayer,
+            OPlayer,
+            Draw,
+            InProgress
         }
 
-        private struct StPlayer
+        private enum EnPlayer
         {
-            public string Name;
-            public EnSymbols Symbol;
-
-            public StPlayer(string name, EnSymbols symbol)
-            {
-                Name = name;
-                Symbol = symbol;
-            }
-
+            XPlayer,
+            OPlayer
         }
 
-        private readonly StPlayer _XPlayer, _OPlayer;
-        private StPlayer _CurrentPlayer;
-        private EnGameState _GameState = EnGameState.InProgress;
+        private struct StGameState
+        {
+            public EnWinner Winner;
+            public bool GameOver;
+            public byte PlayCount;
+        }
+
+        private readonly string _XPlayerName, _OPlayerName;
+        private EnPlayer _PlayerTurn;
+        private StGameState _GameStatus;
 
         private void ResetPictureBox(PictureBox Pb)
         {
@@ -64,28 +66,16 @@ namespace TicTacToe.GUI
             InitializeComponent();
             ResetPictureBoxes();
 
-            _XPlayer = new StPlayer(XPlayerName, EnSymbols.X);
-            _OPlayer = new StPlayer(OPlayerName, EnSymbols.O);
+            _XPlayerName = XPlayerName;
+            _OPlayerName = OPlayerName;
 
-            _CurrentPlayer = _XPlayer;
-
-            LbCurrentPlayerName.Text = _CurrentPlayer.Name;
-
+            _PlayerTurn = EnPlayer.XPlayer;
+            LbCurrentPlayerName.Text = _XPlayerName;
         }
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void SwitchPlayer()
-        {
-            if (_CurrentPlayer.Symbol == EnSymbols.X)
-                _CurrentPlayer = _OPlayer;
-            else
-                _CurrentPlayer = _XPlayer;
-
-            LbCurrentPlayerName.Text = _CurrentPlayer.Name;
         }
 
         private void ShowGameOverMessage()
@@ -95,141 +85,127 @@ namespace TicTacToe.GUI
 
         }
 
-        private bool CheckGameOver()
+        private void EndGame()
         {
-            bool IsWinner = false;
+            _GameStatus.GameOver = true;
 
-            if ((EnSymbols) Pb00.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb01.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb02.Tag == _CurrentPlayer.Symbol)
+            switch (_GameStatus.Winner)
             {
-                Pb00.BackColor = Color.Green;
-                Pb01.BackColor = Color.Green;
-                Pb02.BackColor = Color.Green;
-                IsWinner = true;
-            }
-            else if ((EnSymbols) Pb10.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb11.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb12.Tag == _CurrentPlayer.Symbol)
-            {
-                Pb10.BackColor = Color.Green;
-                Pb11.BackColor = Color.Green;
-                Pb12.BackColor = Color.Green;
-                IsWinner = true;
-            }
-            else if ((EnSymbols) Pb20.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb21.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb22.Tag == _CurrentPlayer.Symbol)
-            {
-                Pb20.BackColor = Color.Green;
-                Pb21.BackColor = Color.Green;
-                Pb22.BackColor = Color.Green;
-                IsWinner = true;
-            }
-            else if ((EnSymbols) Pb00.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb10.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb20.Tag == _CurrentPlayer.Symbol)
-            {
-                Pb00.BackColor = Color.Green;
-                Pb10.BackColor = Color.Green;
-                Pb20.BackColor = Color.Green;
-                IsWinner = true;
-            }
-            else if ((EnSymbols) Pb01.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb11.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb21.Tag == _CurrentPlayer.Symbol)
-            {
-                Pb01.BackColor = Color.Green;
-                Pb11.BackColor = Color.Green;
-                Pb21.BackColor = Color.Green;
-                IsWinner = true;
-            }
-            else if ((EnSymbols) Pb02.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb12.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb22.Tag == _CurrentPlayer.Symbol)
-            {
-                Pb02.BackColor = Color.Green;
-                Pb12.BackColor = Color.Green;
-                Pb22.BackColor = Color.Green;
-                IsWinner = true;
-            }
-            else if ((EnSymbols) Pb00.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb11.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb22.Tag == _CurrentPlayer.Symbol)
-            {
-                Pb00.BackColor = Color.Green;
-                Pb11.BackColor = Color.Green;
-                Pb22.BackColor = Color.Green;
-                IsWinner = true;
-            }
-            else if ((EnSymbols) Pb02.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb11.Tag == _CurrentPlayer.Symbol && (EnSymbols)Pb20.Tag == _CurrentPlayer.Symbol)
-            {
-                Pb02.BackColor = Color.Green;
-                Pb11.BackColor = Color.Green;
-                Pb20.BackColor = Color.Green;
-                IsWinner = true;
-            }
-
-            if (IsWinner)
-            {
-                LbWinnerName.Text = _CurrentPlayer.Name;
-                LbCurrentPlayerName.Text = "انتهت اللعبة";
-                _GameState = EnGameState.GameOver;
-                ShowGameOverMessage();
-                return true;
-            }
-            else
-            {
-                if ((EnSymbols) Pb00.Tag != EnSymbols.QuestionMark &&
-                    (EnSymbols) Pb01.Tag != EnSymbols.QuestionMark &&
-                    (EnSymbols) Pb02.Tag != EnSymbols.QuestionMark &&
-                    
-                    (EnSymbols) Pb10.Tag != EnSymbols.QuestionMark &&
-                    (EnSymbols) Pb11.Tag != EnSymbols.QuestionMark &&
-                    (EnSymbols) Pb12.Tag != EnSymbols.QuestionMark &&
-                    
-                    (EnSymbols) Pb20.Tag != EnSymbols.QuestionMark &&
-                    (EnSymbols) Pb21.Tag != EnSymbols.QuestionMark &&
-                    (EnSymbols) Pb22.Tag != EnSymbols.QuestionMark)
-                {
+                case EnWinner.XPlayer:
+                    LbWinnerName.Text = _XPlayerName;
+                    break;
+                case EnWinner.OPlayer:
+                    LbWinnerName.Text = _OPlayerName;
+                    break;
+                case EnWinner.Draw:
                     LbWinnerName.Text = "تعادل";
-                    LbCurrentPlayerName.Text = "انتهت اللعبة";
-                    _GameState = EnGameState.GameOver;
-                    ShowGameOverMessage();
-                    return true;
+                    break;
+            }
+
+            LbCurrentPlayerName.Text = "انتهت اللعبة";
+            ShowGameOverMessage();
+        }
+
+        private bool CheckValues(PictureBox Pb1, PictureBox Pb2, PictureBox Pb3)
+        {
+            if (((EnSymbols)Pb1.Tag) != EnSymbols.QuestionMark
+            && ((EnSymbols)Pb1.Tag) == ((EnSymbols)Pb2.Tag)
+            && ((EnSymbols)Pb1.Tag) == ((EnSymbols)Pb3.Tag))
+            {
+                Pb1.BackColor = Color.Green;
+                Pb2.BackColor = Color.Green;
+                Pb3.BackColor = Color.Green;
+
+                switch ((EnSymbols) Pb1.Tag)
+                {
+                    case EnSymbols.X:
+                        _GameStatus.Winner = EnWinner.XPlayer;
+                        break;
+                    case EnSymbols.O:
+                        _GameStatus.Winner = EnWinner.OPlayer;
+                        break;
                 }
+
+                EndGame();
+                return true;
             }
 
             return false;
         }
 
+        private void CheckWinner()
+        {
+            if (CheckValues(Pb00, Pb01, Pb02))
+                return;
+            if (CheckValues(Pb10, Pb11, Pb12))
+                return;
+            if (CheckValues(Pb20, Pb21, Pb22))
+                return;
+
+            if (CheckValues(Pb00, Pb10, Pb20))
+                return;
+            if (CheckValues(Pb01, Pb11, Pb21))
+                return;
+            if (CheckValues(Pb02, Pb12, Pb22))
+                return;
+
+            if (CheckValues(Pb00, Pb11, Pb22))
+                return;
+            if (CheckValues(Pb02, Pb11, Pb20))
+                return;
+
+            if (_GameStatus.PlayCount == 9)
+            {
+                _GameStatus.Winner = EnWinner.Draw;
+                EndGame();
+            }
+
+        }
+
+        private void ChangePicture(PictureBox pictureBox)
+        {
+            if ((EnSymbols)pictureBox.Tag != EnSymbols.QuestionMark)
+            {
+                MessageBox.Show("اختيار خاطئ!\nالرجاء اختيار صندوق آخر.",
+                    "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            switch (_PlayerTurn)
+            {
+                case EnPlayer.XPlayer:
+                    pictureBox.Image = Resources.X_Symbol;
+                    pictureBox.Tag = EnSymbols.X;
+                    _PlayerTurn = EnPlayer.OPlayer;
+                    LbCurrentPlayerName.Text = _OPlayerName;
+                    break;
+                case EnPlayer.OPlayer:
+                    pictureBox.Image = Resources.O_Symbol;
+                    pictureBox.Tag = EnSymbols.O;
+                    _PlayerTurn = EnPlayer.XPlayer;
+                    LbCurrentPlayerName.Text = _XPlayerName;
+                    break;
+            }
+
+            _GameStatus.PlayCount++;
+        }
+
         private void BoxClicked(object sender, EventArgs e)
         {
-            if (_GameState == EnGameState.GameOver) return;
+            if (_GameStatus.GameOver) return;
 
-            if (sender is PictureBox PbSender)
-            {
-                if ((EnSymbols) PbSender.Tag != EnSymbols.QuestionMark)
-                {
-                    MessageBox.Show("اختيار خاطئ!\nالرجاء اختيار صندوق آخر.",
-                        "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            ChangePicture((PictureBox) sender);
 
-                switch (_CurrentPlayer.Symbol)
-                {
-                    case EnSymbols.X:
-                        PbSender.Image = Resources.X_Symbol;
-                        PbSender.Tag = EnSymbols.X;
-                        break;
-                    case EnSymbols.O:
-                        PbSender.Image = Resources.O_Symbol;
-                        PbSender.Tag = EnSymbols.O;
-                        break;
-                    default:
-                        MessageBox.Show("Some thing went wrong!\nif you saw this you must have done a really bad thing!",
-                            "What?", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                }
-
-                if (!CheckGameOver())
-                    SwitchPlayer();
-            }
+            CheckWinner();
         }
 
         private void ResetGame()
         {
             ResetPictureBoxes();
-            _CurrentPlayer = _XPlayer;
-            LbCurrentPlayerName.Text = _CurrentPlayer.Name;
+            _GameStatus = new StGameState();
+            _PlayerTurn = EnPlayer.XPlayer;
+            LbCurrentPlayerName.Text = _XPlayerName;
             LbWinnerName.Text = "...";
-            _GameState = EnGameState.InProgress;
         }
 
         private void BtnReset_Click(object sender, EventArgs e)
