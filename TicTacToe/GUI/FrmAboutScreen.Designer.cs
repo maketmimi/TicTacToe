@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAboutScreen));
             this.LbDevName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.PbLogo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // LbDevName
@@ -57,15 +57,17 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Version 1";
             // 
-            // pictureBox1
+            // PbLogo
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(208, 24);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 200);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.PbLogo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbLogo.Image = ((System.Drawing.Image)(resources.GetObject("PbLogo.Image")));
+            this.PbLogo.Location = new System.Drawing.Point(208, 24);
+            this.PbLogo.Name = "PbLogo";
+            this.PbLogo.Size = new System.Drawing.Size(200, 200);
+            this.PbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PbLogo.TabIndex = 0;
+            this.PbLogo.TabStop = false;
+            this.PbLogo.Click += new System.EventHandler(this.PbLogo_Click);
             // 
             // FrmAboutScreen
             // 
@@ -75,7 +77,7 @@
             this.ClientSize = new System.Drawing.Size(616, 406);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LbDevName);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PbLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -83,7 +85,7 @@
             this.Name = "FrmAboutScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,7 +93,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PbLogo;
         private System.Windows.Forms.Label LbDevName;
         private System.Windows.Forms.Label label1;
     }
