@@ -17,12 +17,6 @@ namespace TicTacToe.GUI
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(TxtPlayer1Name.Text) || String.IsNullOrEmpty(TxtPlayer2Name.Text))
-            {
-                MessageBox.Show("لا يمكن ترك الحقول فارغة!", "خطأ!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             this.Hide();
 
             FrmGamePlay fGamePlay = new FrmGamePlay(TxtPlayer1Name.Text, TxtPlayer2Name.Text);
@@ -31,5 +25,18 @@ namespace TicTacToe.GUI
 
             this.Close();
         }
+
+        private void NameField_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            TextBox NameField = (TextBox) sender;
+            if (string.IsNullOrWhiteSpace(NameField.Text))
+            {
+                ErrpMain.SetError(NameField, "حقل إجباري!");
+                e.Cancel = true;
+            }
+            else
+                ErrpMain.SetError(NameField, null);
+        }
+        
     }
 }

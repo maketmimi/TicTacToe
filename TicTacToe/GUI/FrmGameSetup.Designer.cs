@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGameSetup));
             this.label1 = new System.Windows.Forms.Label();
             this.TxtPlayer1Name = new System.Windows.Forms.TextBox();
@@ -35,6 +36,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.BtnPlay = new System.Windows.Forms.Button();
             this.BtnClose = new System.Windows.Forms.Button();
+            this.ErrpMain = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.ErrpMain)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -53,32 +56,36 @@
             // 
             this.TxtPlayer1Name.BackColor = System.Drawing.Color.White;
             this.TxtPlayer1Name.Font = new System.Drawing.Font("Tahoma", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ErrpMain.SetIconPadding(this.TxtPlayer1Name, 5);
             this.TxtPlayer1Name.Location = new System.Drawing.Point(217, 129);
             this.TxtPlayer1Name.MaxLength = 8;
             this.TxtPlayer1Name.Name = "TxtPlayer1Name";
             this.TxtPlayer1Name.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TxtPlayer1Name.Size = new System.Drawing.Size(262, 50);
-            this.TxtPlayer1Name.TabIndex = 1;
+            this.TxtPlayer1Name.TabIndex = 0;
             this.TxtPlayer1Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtPlayer1Name.Validating += new System.ComponentModel.CancelEventHandler(this.NameField_Validating);
             // 
             // TxtPlayer2Name
             // 
             this.TxtPlayer2Name.BackColor = System.Drawing.Color.White;
             this.TxtPlayer2Name.Font = new System.Drawing.Font("Tahoma", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtPlayer2Name.Location = new System.Drawing.Point(217, 322);
+            this.ErrpMain.SetIconPadding(this.TxtPlayer2Name, 5);
+            this.TxtPlayer2Name.Location = new System.Drawing.Point(217, 311);
             this.TxtPlayer2Name.MaxLength = 8;
             this.TxtPlayer2Name.Name = "TxtPlayer2Name";
             this.TxtPlayer2Name.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.TxtPlayer2Name.Size = new System.Drawing.Size(262, 50);
-            this.TxtPlayer2Name.TabIndex = 3;
+            this.TxtPlayer2Name.TabIndex = 1;
             this.TxtPlayer2Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtPlayer2Name.Validating += new System.ComponentModel.CancelEventHandler(this.NameField_Validating);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(183, 236);
+            this.label2.Location = new System.Drawing.Point(183, 225);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(330, 48);
             this.label2.TabIndex = 2;
@@ -98,7 +105,7 @@
             this.BtnPlay.Location = new System.Drawing.Point(141, 421);
             this.BtnPlay.Name = "BtnPlay";
             this.BtnPlay.Size = new System.Drawing.Size(192, 53);
-            this.BtnPlay.TabIndex = 4;
+            this.BtnPlay.TabIndex = 2;
             this.BtnPlay.Text = "العب";
             this.BtnPlay.UseVisualStyleBackColor = false;
             this.BtnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
@@ -106,6 +113,7 @@
             // BtnClose
             // 
             this.BtnClose.BackColor = System.Drawing.Color.Transparent;
+            this.BtnClose.CausesValidation = false;
             this.BtnClose.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BtnClose.FlatAppearance.BorderSize = 3;
             this.BtnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -116,16 +124,24 @@
             this.BtnClose.Location = new System.Drawing.Point(364, 421);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(192, 53);
-            this.BtnClose.TabIndex = 5;
+            this.BtnClose.TabIndex = 3;
             this.BtnClose.Text = "إغلاق";
             this.BtnClose.UseVisualStyleBackColor = false;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            // 
+            // ErrpMain
+            // 
+            this.ErrpMain.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.ErrpMain.ContainerControl = this;
+            this.ErrpMain.Icon = ((System.Drawing.Icon)(resources.GetObject("ErrpMain.Icon")));
+            this.ErrpMain.RightToLeft = true;
             // 
             // FrmGameSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(24)))), ((int)(((byte)(40)))));
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(696, 486);
             this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.BtnPlay);
@@ -139,6 +155,7 @@
             this.Name = "FrmGameSetup";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "إعداد اللعبة";
+            ((System.ComponentModel.ISupportInitialize)(this.ErrpMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,5 +169,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BtnPlay;
         private System.Windows.Forms.Button BtnClose;
+        private System.Windows.Forms.ErrorProvider ErrpMain;
     }
 }
